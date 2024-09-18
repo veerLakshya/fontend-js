@@ -6,6 +6,7 @@ import OtpVerifier from "../../../components/OtpVerifier";
 import { useDispatch } from "react-redux";
 import { authActions } from "../../../store/AuthSlice";
 import { userActions } from "../../../store/UserSlice";
+import usePatient from "../../../hooks/usePatienth";
 const Signin = () => {
 	const aadharRef = useRef(null);
 	const navigate = useNavigate();
@@ -104,6 +105,7 @@ const Signin = () => {
 										AccessToken: res.data.data.AccessToken,
 									})
 								);
+								usePatient();
 								localStorage.setItem(
 									"isDoctor",
 									res.data.data.loggedinUser.isDoctor

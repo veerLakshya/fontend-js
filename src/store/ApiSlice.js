@@ -89,6 +89,14 @@ export const apiSlice = createApi({
 				method: "GET",
 			}),
 		}),
+		getPatientDetails: builder.query({
+			query: () => ({
+				url: "/api/v1/treatment/getPatientDetails",
+				method: "GET",
+				credentials: "include",
+			}),
+		}),
+
 		createTreatment: builder.mutation({
 			query: (data) => ({
 				url: '/api/v1/treatment/createTreatment',

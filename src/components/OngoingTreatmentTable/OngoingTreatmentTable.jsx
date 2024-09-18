@@ -1,7 +1,10 @@
+import { useState } from "react";
 import { useSelector } from "react-redux";
+import OngoingTreatmentForm from "./OngoingTreatmentForm";
 
-const PatientTable = ({ data }) => {
+const OngoingTreatmentTable = () => {
 	const patientDetails = useSelector((store) => store.patient.patient);
+	const [isFormVisible, setIsFromVisible] = useState(false);
 	return (
 		<div className="overflow-x-auto w-full h-full">
 			<table className="min-w-full bg-white border border-gray-200">
@@ -34,8 +37,16 @@ const PatientTable = ({ data }) => {
 					))}
 				</tbody>
 			</table>
+
+			<button
+				onClick={() => setIsFromVisible(true)}
+				className="mt-10 p-4 bg-green-500 text-white hover:bg-green-600 transition-all duration-300 font-bold rounded-lg "
+			>
+				Add New Treatment
+			</button>
+			<OngoingTreatmentForm setIsFromVisible isVisible={isFormVisible} />
 		</div>
 	);
 };
 
-export default PatientTable;
+export default OngoingTreatmentTable;

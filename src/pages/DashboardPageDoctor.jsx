@@ -4,7 +4,8 @@ import SideNav from "../components/SideNav"; // Adjust the import path as necess
 import DoctorDashboard from "../components/DoctorDashboard"; // Adjust the import path as necessary
 
 import { AddTreatment } from "../components/AddTreatment";
-import { AdvanceTable } from "../components/AdvanceTable/AdvanceTable";
+import PatientTable from "../components/PatientTable/PatiendTable";
+import OngoingTreatmentTable from "../components/OngoingTreatmentTable";
 const DashboardPageDoctor = () => {
 	const [currentPage, setCurrentPage] = useState(0);
 
@@ -38,8 +39,11 @@ const DashboardPageDoctor = () => {
 					<DoctorDashboard currentPage={currentPage} />
 				) : currentPage == 1 ? (
 					<AddTreatment />
+				) : currentPage == 2 ? (
+					// <AdvanceTable users={[]} />
+					<PatientTable data={[]} />
 				) : (
-					<AdvanceTable users={[]} />
+					<OngoingTreatmentTable />
 				)}
 			</>
 		</div>

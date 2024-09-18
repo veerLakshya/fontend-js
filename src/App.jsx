@@ -19,11 +19,13 @@ import useInitialAuth from "./hooks/useInitialAuth";
 import DashboardPagePatient from "./pages/DashboardPagePatient";
 import DashboardPageDoctor from "./pages/DashboardPageDoctor";
 import { Navigate } from "react-router-dom";
+import usePatient from "./hooks/usePatienth";
 function App() {
 	const [isloading, setloading] = useState(true);
 	useInitialAuth(setloading);
 	const token = useSelector((store) => store.auth.token);
 	const user = useSelector((store) => store.currUser.user);
+	usePatient();
 	console.log(token);
 	console.log(user);
 	if (isloading) {

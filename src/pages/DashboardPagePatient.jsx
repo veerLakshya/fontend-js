@@ -1,7 +1,13 @@
 import { AiFillDropboxSquare } from "react-icons/ai";
 import SideNav from "../components/SideNav";
+import { useState } from "react";
 
 const DashboardPagePatient = () => {
+	const [currentPage, setCurrentPage] = useState(0);
+
+	const handleOptionClick = (index) => {
+		setCurrentPage(index);
+	};
 	return (
 		<>
 			<div className="h-[90vh] w-full flex">
@@ -22,6 +28,7 @@ const DashboardPagePatient = () => {
 						"explain",
 						"",
 					]}
+					setCurrentPage={handleOptionClick}
 				/>
 				{/* <SideNav
 				logos={[
