@@ -104,7 +104,24 @@ export const apiSlice = createApi({
 				credentials: "include",
 				body: data
 			})
-		})
+		}),
+		addReports: builder.mutation({
+			query: (data) => ({
+				url: '/api/v1/treatment/addReport',
+				method: "POST",
+				credentials: "include",
+				body: data,
+
+			}),
+
+		}),
+		getTreatment: builder.query({
+			query: ({ TreatmentId }) => ({
+				url: `/api/v1/treatment/getTreatmentDetails/${TreatmentId}`,
+				method: "GET",
+				credentials: "include",
+			}),
+		}),
 	}),
 });
-export const { useLoginMutation, usePatinetsignupMutation, useCreateTreatmentMutation } = apiSlice;
+export const { useLoginMutation, usePatinetsignupMutation, useCreateTreatmentMutation, useAddReportsMutation, useGetTreatmentQuery } = apiSlice;

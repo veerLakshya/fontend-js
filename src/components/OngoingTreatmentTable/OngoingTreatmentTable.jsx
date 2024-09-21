@@ -1,9 +1,11 @@
 import { useState } from "react";
 import { useSelector } from "react-redux";
 import OngoingTreatmentForm from "./OngoingTreatmentForm";
+import { Link } from "react-router-dom";
 
 const OngoingTreatmentTable = () => {
 	const patientDetails = useSelector((store) => store.patient.patient);
+	const [currentTreatmentId, setCurrentTreatmentId] = useState("");
 	const [isFormVisible, setIsFromVisible] = useState(false);
 	return (
 		<div className="overflow-x-auto w-full h-full">
@@ -19,13 +21,21 @@ const OngoingTreatmentTable = () => {
 						<th className="py-3 px-4 text-left text-sm font-semibold text-gray-700 border-b">
 							Diagnosed With
 						</th>
+						<th className="py-3 px-4 text-left text-sm font-semibold text-gray-700 border-b">
+							Update Treatment
+						</th>
 					</tr>
 				</thead>
 				<tbody>
 					{patientDetails.map((patient, index) => (
 						<tr key={index} className="hover:bg-gray-50">
 							<td className="py-3 px-4 border-b">
-								{patient.PatientName}
+								<Link
+									className="text-blue-500 hover:text-blue-800"
+									to={`/treatmentHistory/${patient._id}`}
+								>
+									{patient.PatientName}
+								</Link>
 							</td>
 							<td className="py-3 px-4 border-b">
 								{patient.iscompleted ? "Completed" : "Ongoing"}
@@ -33,18 +43,27 @@ const OngoingTreatmentTable = () => {
 							<td className="py-3 px-4 border-b">
 								{patient.DiagonsedWith}
 							</td>
+							<td className="py-3 px-4 border-b">
+								<button
+									onClick={() => {
+										setCurrentTreatmentId(patient._id);
+										setIsFromVisible(true);
+									}}
+									className=" p-2 text-sm bg-green-500 text-white hover:bg-green-600 transition-all duration-300 font-bold rounded-lg "
+								>
+									Add New Treatment
+								</button>
+							</td>
 						</tr>
 					))}
 				</tbody>
 			</table>
 
-			<button
-				onClick={() => setIsFromVisible(true)}
-				className="mt-10 p-4 bg-green-500 text-white hover:bg-green-600 transition-all duration-300 font-bold rounded-lg "
-			>
-				Add New Treatment
-			</button>
-			<OngoingTreatmentForm setIsFromVisible isVisible={isFormVisible} />
+			<OngoingTreatmentForm
+				TreatmentId={currentTreatmentId}
+				setIsFromVisible={setIsFromVisible}
+				isVisible={isFormVisible}
+			/>
 		</div>
 	);
 };

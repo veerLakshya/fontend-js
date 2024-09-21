@@ -61,6 +61,11 @@ export const validateDoctor = (data) => {
 	return true;
 };
 
+export const dateParser = (date) => {
+	const d = new Date(date);
+	return d.toDateString();
+};
+
 const loginOtpVarifier = async (
 	phoneNumber,
 	setValidOtp

@@ -20,6 +20,7 @@ import DashboardPagePatient from "./pages/DashboardPagePatient";
 import DashboardPageDoctor from "./pages/DashboardPageDoctor";
 import { Navigate } from "react-router-dom";
 import usePatient from "./hooks/usePatienth";
+import TreatmentHistory from "./pages/TreatmentHistory";
 function App() {
 	const [isloading, setloading] = useState(true);
 	useInitialAuth(setloading);
@@ -51,6 +52,16 @@ function App() {
 						<Route
 							path="/patientdashboard"
 							element={<DashboardPagePatient />}
+						/>
+						<Route
+							path="/treatmentHistory/:patientId"
+							element={
+								user && user.isDoctor ? (
+									<TreatmentHistory />
+								) : (
+									<Navigate to="/patientdashboard" replace />
+								)
+							}
 						/>
 					</Route>
 					<Route
